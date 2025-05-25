@@ -13,7 +13,7 @@ import * as bcrypt from 'bcrypt';
 import { HistoryService } from '../history/history.service';
 import { ActionType, EntityType } from '../history/history.entity';
 import { Role } from '../common/constants';
-import { EventsGateway } from '../events/events.gateway'; // импорт EventsGateway
+import { EventsGateway } from '../events/events.gateway';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 

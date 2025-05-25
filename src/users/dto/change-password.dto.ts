@@ -1,7 +1,7 @@
 // src/users/dto/change-password.dto.ts
 import { IsNotEmpty, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Match } from '../../common/decorators/match.decorator'; // путь может отличаться
+import { Match } from '../../common/decorators/match.decorator';
 
 export class ChangePasswordDto {
   @ApiProperty({
@@ -24,6 +24,6 @@ export class ChangePasswordDto {
     description: 'New user password confirmation',
   })
   @IsNotEmpty({ message: 'Confirm new password is required' })
-  @Match('newPassword', { message: 'Passwords do not match' }) // ✅ Правильное сравнение
+  @Match('newPassword', { message: 'Passwords do not match' })
   confirmNewPassword: string;
 }

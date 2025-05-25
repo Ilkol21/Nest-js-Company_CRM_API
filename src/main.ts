@@ -29,8 +29,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // НЕ создаём здесь Socket.IO сервер вручную!
-
   await app.listen(3000);
 }
 

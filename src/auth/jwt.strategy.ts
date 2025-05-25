@@ -25,8 +25,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     if (!user) {
       throw new UnauthorizedException();
     }
-
-    // user уже не содержит поле password, возвращаем его как есть
     return user;
   }
 }

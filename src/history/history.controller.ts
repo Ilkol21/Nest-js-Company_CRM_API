@@ -8,7 +8,7 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../common/jwt-auth.guard';
-import { RolesGuard } from '../common/roles.guard';
+import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../common/roles.decorator';
 import { Role } from '../common/constants';
 import { ActionType, EntityType } from './history.entity';
@@ -16,7 +16,7 @@ import { ActionType, EntityType } from './history.entity';
 @ApiTags('History')
 @Controller('history')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.Admin, Role.SuperAdmin) // Только Admin и SuperAdmin имеют доступ к истории
+@Roles(Role.Admin, Role.SuperAdmin)
 export class HistoryController {
   constructor(private readonly historyService: HistoryService) {}
 

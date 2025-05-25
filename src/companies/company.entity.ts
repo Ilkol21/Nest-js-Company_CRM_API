@@ -18,13 +18,12 @@ export class Company {
   name: string;
 
   @Column({ nullable: true })
-  service: string; // Тип услуг, предоставляемых компанией
+  service: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
-  capital: number; // Капитал компании
-
+  capital: number;
   @Column({ nullable: true })
-  logo: string; // URL или путь к логотипу компании
+  logo: string;
 
   @Column({ type: 'double precision', nullable: true })
   locationLat: number;
@@ -37,7 +36,7 @@ export class Company {
   owner: User;
 
   @Column()
-  ownerId: number; // ID владельца компании
+  ownerId: number;
 
   @CreateDateColumn()
   createdAt: Date;

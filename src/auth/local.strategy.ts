@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(private authService: AuthService) {
     super({
-      usernameField: 'email', // Используем email вместо username
+      usernameField: 'email',
     });
   }
 
@@ -16,6 +16,6 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    return user; // Passport добавит этот user в req.user
+    return user;
   }
 }

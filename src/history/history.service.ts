@@ -26,15 +26,13 @@ export class HistoryService {
     limit: number = 10,
     sortBy: string = 'timestamp',
     sortOrder: 'DESC' | 'ASC' = 'DESC',
-    userId?: number, // Фильтр по пользователю, совершившему действие
-    actionType?: ActionType, // Фильтр по типу действия
-    entityType?: EntityType, // Фильтр по типу сущности
-    entityId?: number, // Фильтр по ID сущности
-    search?: string, // Поиск по деталям
+    userId?: number,
+    actionType?: ActionType,
+    entityType?: EntityType,
+    entityId?: number,
+    search?: string,
   ): Promise<{ history: History[]; total: number }> {
     const query = this.historyRepository.createQueryBuilder('history');
-
-    // Отношение с пользователем для получения его данных
     query.leftJoinAndSelect('history.user', 'user');
 
     if (userId) {
@@ -54,8 +52,6 @@ export class HistoryService {
         search: `%${search}%`,
       });
     }
-
-    // Проверка допустимых полей для сортировки
     const allowedSortFields = [
       'id',
       'timestamp',
@@ -65,7 +61,7 @@ export class HistoryService {
       'userId',
     ];
     if (!allowedSortFields.includes(sortBy)) {
-      sortBy = 'timestamp'; // По умолчанию сортируем по timestamp
+      sortBy = 'timestamp';
     }
 
     query.orderBy(`history.${sortBy}`, sortOrder);

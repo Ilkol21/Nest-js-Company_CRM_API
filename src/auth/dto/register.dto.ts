@@ -26,6 +26,6 @@ export class RegisterDto {
   password: string;
 
   @IsEnum(Role)
-  @IsOptional() // если не передали, будет User по умолчанию
+  @IsOptional()
   role?: Role;
 }

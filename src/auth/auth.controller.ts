@@ -11,7 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { LocalAuthGuard } from './local-auth.guard'; // Будет создан ниже
+import { LocalAuthGuard } from './local-auth.guard';
 import { JwtAuthGuard } from '../common/jwt-auth.guard';
 import { ApiTags, ApiResponse, ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 
@@ -28,7 +28,6 @@ export class AuthController {
   })
   async register(@Body() registerDto: RegisterDto) {
     const user = await this.authService.register(registerDto);
-    // user уже не содержит password, поэтому возвращаем как есть
     return user;
   }
 

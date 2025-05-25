@@ -17,7 +17,7 @@ import {
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../common/jwt-auth.guard';
-import { RolesGuard } from '../common/roles.guard';
+import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../common/roles.decorator';
 import { Role } from '../common/constants';
 import {

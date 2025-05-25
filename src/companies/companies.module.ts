@@ -10,6 +10,6 @@ import { EventsModule } from '../events/events.module';
   imports: [TypeOrmModule.forFeature([Company]), HistoryModule, EventsModule],
   providers: [CompaniesService],
   controllers: [CompaniesController],
-  exports: [CompaniesService], // Экспортируем для Dashboard статистики
+  exports: [CompaniesService],
 })
 export class CompaniesModule {}

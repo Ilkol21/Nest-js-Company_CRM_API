@@ -9,7 +9,7 @@ import {
 import { User } from '../users/user.entity';
 
 export enum ActionType {
-  USER_CREATED = 'USER_CREATED', // Только если админ создает пользователя/админа
+  USER_CREATED = 'USER_CREATED',
   USER_UPDATED = 'USER_UPDATED',
   USER_DELETED = 'USER_DELETED',
   PROFILE_EDITED = 'PROFILE_EDITED',
@@ -21,7 +21,7 @@ export enum ActionType {
 
   ADMIN_CREATED = 'ADMIN_CREATED',
   ADMIN_DELETED = 'ADMIN_DELETED',
-  ADMIN_UPDATED = 'ADMIN_UPDATED', // Если админ меняет данные другого админа/пользователя
+  ADMIN_UPDATED = 'ADMIN_UPDATED',
 }
 
 export enum EntityType {
@@ -45,13 +45,13 @@ export class History {
   action: ActionType;
 
   @Column({ type: 'enum', enum: EntityType })
-  entityType: EntityType; // Тип сущности, на которую повлияло действие
+  entityType: EntityType;
 
   @Column({ nullable: true })
-  entityId: number; // ID сущности, на которую повлияло действие
+  entityId: number;
 
   @Column('text')
-  details: string; // Детальное описание действия
+  details: string;
 
   @CreateDateColumn()
   timestamp: Date;

@@ -32,22 +32,18 @@ export class User {
   role: Role;
 
   @Column({ nullable: true })
-  avatar: string; // URL или путь к аватару пользователя
+  avatar: string;
 
   @Column({ nullable: true })
-  refreshToken: string; // Хэш рефреш-токена
+  refreshToken: string;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  // Связь с компаниями (один пользователь может владеть многими компаниями)
   @OneToMany(() => Company, (company) => company.owner)
   companies: Company[];
-
-  // Связь с историей (один пользователь может иметь много записей истории)
   @OneToMany(() => History, (history) => history.user)
   history: History[];
 }

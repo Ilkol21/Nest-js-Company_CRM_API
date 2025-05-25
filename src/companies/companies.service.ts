@@ -14,7 +14,7 @@ import { HistoryService } from '../history/history.service';
 import { ActionType, EntityType } from '../history/history.entity';
 import { Role } from '../common/constants';
 
-import { EventsGateway } from '../events/events.gateway'; // Импорт EventsGateway
+import { EventsGateway } from '../events/events.gateway';
 
 @Injectable()
 export class CompaniesService {
@@ -22,7 +22,7 @@ export class CompaniesService {
     @InjectRepository(Company)
     private companiesRepository: Repository<Company>,
     private historyService: HistoryService,
-    private eventsGateway: EventsGateway, // Внедряем EventsGateway
+    private eventsGateway: EventsGateway,
   ) {}
 
   async create(
@@ -44,7 +44,6 @@ export class CompaniesService {
       details: `User (ID: ${ownerId}) created company: ${company.name} (ID: ${company.id}).`,
     });
 
-    // Эмитим событие создания компании для клиентов по WebSocket
     this.eventsGateway.emitToAll('companyCreated', company);
 
     return company;
@@ -72,7 +71,7 @@ export class CompaniesService {
       userId &&
       (userRole === Role.Admin || userRole === Role.SuperAdmin)
     ) {
-      // Админ и Суперадмин видят все компании
+      // Admin and Superadmin can see all companies
     }
 
     if (nameSearch) {
@@ -208,7 +207,6 @@ export class CompaniesService {
       details: `${userRole} (ID: ${userId}) deleted company: ${company.name} (ID: ${company.id}).`,
     });
 
-    // Эмитим событие удаления компании
     this.eventsGateway.emitToAll('companyDeleted', { id });
   }
 
