@@ -33,7 +33,6 @@ import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
 import { RolesGuard } from '../auth/roles.guard';
 
-// Временная функция вместо отсутствующего модуля
 const getHostUrl = (req: any): string => {
   const protocol = req.protocol;
   const host = req.get('host');

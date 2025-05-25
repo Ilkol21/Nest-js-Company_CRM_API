@@ -35,13 +35,22 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
+import { ConfigService } from '@nestjs/config';
+
+const getHostUrl = (req: any): string => {
+  const protocol = req.protocol;
+  const host = req.get('host');
+  return `${protocol}://${host}`;
+};
 
 @ApiTags('Users')
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
-
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly configService: ConfigService,
+  ) {}
   @Get('profile')
   @Roles(Role.User, Role.Admin, Role.SuperAdmin)
   @ApiBearerAuth()
@@ -134,13 +143,17 @@ export class UsersController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     const avatarPath = `/uploads/avatars/${file.filename}`;
+    const backendUrl = this.configService.get<string>('BACKEND_URL') || `${req.protocol}://${req.get('host')}`;
+    const fullAvatarUrl = `${backendUrl}${avatarPath}`;
+
     const updatedUser = await this.usersService.update(
       req.user.id,
-      { avatar: avatarPath },
+      { avatar: fullAvatarUrl },
       req.user,
     );
+
     return {
-      avatar: avatarPath,
+      avatar: fullAvatarUrl,
       message: 'Avatar uploaded successfully',
       user: updatedUser,
     };
